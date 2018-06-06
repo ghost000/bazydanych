@@ -1,7 +1,11 @@
-class Klient():
+class Klient:
     def __init__(self, nazwa = "", ulica = "", miejscowosc = "", telefon = -1, idKlienta = -1):
-        self.__nazwa = nazwa
-        self.__ulica = ulica
-        self.__miejscowosc = miejscowosc
-        self.__telefon = telefon
-        self.__idKlienta = idKlienta
+        self.nazwa = nazwa
+        self.ulica = ulica
+        self.miejscowosc = miejscowosc
+        self.telefon = telefon
+        self.idKlienta = idKlienta
+
+    def __str__(self):
+        return " Klient nazwa: " + self.nazwa + " ulica: " + self.ulica + " miejscowosc: " + self.miejscowosc + \
+               " telefon: " + str(self.telefon) + " idKlienta: " + str(self.idKlienta)

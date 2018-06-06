@@ -9,7 +9,7 @@ class KlientWidokModel():
         if klienci is None:
             klienci = []
 
-        self.__klienci = klienci
+        self.__klienci = klienci #model widoku
         self.__klient = klient
         self.__con = con
         self.__cur = cur
