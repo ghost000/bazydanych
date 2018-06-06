@@ -1,4 +1,4 @@
-from Modele import Pizza
+from Modele.Pizza import Pizza
 import sqlite3 as lite
 import sys
 

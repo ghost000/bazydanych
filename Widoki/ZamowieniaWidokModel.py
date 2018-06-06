@@ -1,4 +1,4 @@
-from Modele import Zamowienia
+from Modele.Zamowienia import Zamowienia
 import sqlite3 as lite
 import sys
 

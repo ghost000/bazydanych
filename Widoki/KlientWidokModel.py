@@ -1,9 +1,9 @@
-from Modele import Klient
+from Modele.Klient import Klient
 import sqlite3 as lite
 import sys
 
 
-class KlientWidokModel:
+class KlientWidokModel():
     def __init__(self, klienci= None, klient = None, con = None, cur = None,
                  path ='Database/RadoslawMadrzakBazaDanych.sqlite3'):
         if klienci is None:

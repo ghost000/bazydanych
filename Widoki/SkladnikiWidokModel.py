@@ -1,4 +1,4 @@
-from Modele import Skladniki
+from Modele.Skladniki import Skladniki
 import sqlite3 as lite
 import sys
 

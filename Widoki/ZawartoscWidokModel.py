@@ -1,4 +1,4 @@
-from Modele import Zawartosc
+from Modele.Zawartosc import Zawartosc
 import sqlite3 as lite
 import sys
 
