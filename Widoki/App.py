@@ -15,18 +15,18 @@ class App(tk.Tk, object):
         self.tabSkladniki = []
         self.tabZamowienia = []
         self.tabZawartosci = []
+        self.zaczytajDane()
         self.title(title)
         self.setGeometry()
         self.dzialamyNaFrame()
-        self.zaczytajDane()
 
     def run(self):
         self.mainloop()
 
     def setGeometry(self):
         self.update()
-        szerokosc = self.winfo_width()+1200
-        wysokosc = self.winfo_height()+400
+        szerokosc = self.winfo_width() + 1200
+        wysokosc = self.winfo_height() + 400
         polozenieX = self.winfo_screenwidth()
         polozenieY = self.winfo_screenheight()
         x = (polozenieX - szerokosc) // 2
@@ -40,42 +40,75 @@ class App(tk.Tk, object):
         bottomframe = tk.Frame(self.master)
         bottomframe.pack(side=tk.BOTTOM)
 
-        scrollBar = tk.Scrollbar(self.master)
-        scrollBar.pack(side=tk.TOP, fill=tk.Y)
+        self.scrollBar = tk.Scrollbar(self.master)
+        self.scrollBar.pack(side=tk.RIGHT, fill=tk.Y)
 
-        mylist = tk.Listbox(self.master, yscrollcommand=scrollBar.set)
-        for line in range(100):
-            mylist.insert(tk.END, "This is line number " + str(line))
+        self.mylist = tk.Listbox(self.master, width=self.winfo_width() + 1200, yscrollcommand=self.scrollBar.set)
+        self.mylist.pack(side=tk.LEFT, fill=tk.BOTH)
 
-        mylist.pack(side=tk.LEFT, fill=tk.BOTH)
-        scrollBar.config(command=mylist.yview)
+        self.klienci()
 
-        klientButton = tk.Button(frame, width=self.winfo_width()//6, text="Klient", fg="red")
+        self.scrollBar.config(command=self.mylist.yview)
+
+        klientButton = tk.Button(frame, width=self.winfo_width() // 6, text="Klient", fg="red", command=self.klienci)
         klientButton.pack(side=tk.LEFT)
 
-        PizzaButton = tk.Button(frame, width=self.winfo_width()//6, text="Pizza", fg="brown")
+        PizzaButton = tk.Button(frame, width=self.winfo_width() // 6, text="Pizza", fg="brown", command=self.Pizza)
         PizzaButton.pack(side=tk.LEFT)
 
-        SkladnikiButton = tk.Button(frame, width=self.winfo_width()//6, text="Skladiki", fg="blue")
+        SkladnikiButton = tk.Button(frame, width=self.winfo_width() // 6, text="Skladiki", fg="blue",
+                                    command=self.Skladniki)
         SkladnikiButton.pack(side=tk.LEFT)
 
-        ZamowieniaButton = tk.Button(frame, width=self.winfo_width()//6, text="Zamowienia", fg="black")
+        ZamowieniaButton = tk.Button(frame, width=self.winfo_width() // 6, text="Zamowienia", fg="black",
+                                     command=self.Zamowienia)
         ZamowieniaButton.pack(side=tk.LEFT)
 
-        ZawartoscButton = tk.Button(frame, width=self.winfo_width()//6, text="Zawartosc", fg="green")
+        ZawartoscButton = tk.Button(frame, width=self.winfo_width() // 6, text="Zawartosc", fg="green",
+                                    command=self.Zawartosc)
         ZawartoscButton.pack(side=tk.LEFT)
 
-        DodajButton = tk.Button(bottomframe, width=self.winfo_width()//4, text="Dodaj", fg="black")
+        DodajButton = tk.Button(bottomframe, width=self.winfo_width() // 4, text="Dodaj", fg="black")
         DodajButton.pack(side=tk.LEFT)
 
-        EdytujButton = tk.Button(bottomframe, width=self.winfo_width()//4, text="Edytuj", fg="black")
+        EdytujButton = tk.Button(bottomframe, width=self.winfo_width() // 4, text="Edytuj", fg="black")
         EdytujButton.pack(side=tk.LEFT)
 
-        UsunButton = tk.Button(bottomframe, width=self.winfo_width()//4, text="Usun", fg="magenta")
+        UsunButton = tk.Button(bottomframe, width=self.winfo_width() // 4, text="Usun", fg="magenta")
         UsunButton.pack(side=tk.LEFT)
 
     def klienci(self):
-        tab
+        self.mylist.delete(0, 'end')
+        for element in self.tabKlienci:
+            self.mylist.insert(tk.END, " Klient nazwa: " + element.nazwa + " ulica: " + element.ulica +
+                               " miejscowosc: " + element.miejscowosc +
+                               " telefon: " + str(element.telefon) + " idKlienta: " + str(element.idKlienta))
+
+    def Pizza(self):
+        self.mylist.delete(0, 'end')
+        for element in self.tabPizza:
+            self.mylist.insert(tk.END, " Pizza nazwa: " + element.nazwa + " opis: " + element.opis + " cena: " +
+                               str(element.cena) + " srednica: " + str(element.srednica) + " idPizza: " +
+                               str(element.idPizza))
+
+    def Skladniki(self):
+        self.mylist.delete(0, 'end')
+        for element in self.tabSkladniki:
+            self.mylist.insert(tk.END, " Skladniki nazwa: " + element.nazwa + " masa: " + str(element.masa) +
+                               " koszt: " + str(element.koszt) + " idSkladnika: " + str(element.idSkladnika))
+
+    def Zamowienia(self):
+        self.mylist.delete(0, 'end')
+        for element in self.tabZamowienia:
+            self.mylist.insert(tk.END, " Zamowienia sztuk: " + str(element.sztuk) + " idZam: " + str(element.idZam)
+                               + " dataZam: " + str(element.dataZam) + " dataDost: " + str(element.dataDost) +
+                               " idPizza: " + str(element.idPizza) + " idKlienta: " + str(element.idKlienta))
+
+    def Zawartosc(self):
+        self.mylist.delete(0, 'end')
+        for element in self.tabZawartosci:
+            self.mylist.insert(tk.END, " Zawartosc idZawartosc: " + str(element.idZawartosc) + " idSkladnika: "
+                               + str(element.idSkladnika) + " idPizza: " + str(element.idPizza))
 
     def zaczytajDane(self):
         obj1 = KlientWidokModel()
@@ -86,11 +119,16 @@ class App(tk.Tk, object):
 
         for element in obj1.getKlienci():
             self.tabKlienci.append(element)
+            print(element)
         for element in obj2.getPizze():
             self.tabPizza.append(element)
+            print(element)
         for element in obj3.getSkladniki():
             self.tabSkladniki.append(element)
+            print(element)
         for element in obj4.getZamowienia():
             self.tabZamowienia.append(element)
+            print(element)
         for element in obj5.getZawartosci():
             self.tabZawartosci.append(element)
+            print(element)
