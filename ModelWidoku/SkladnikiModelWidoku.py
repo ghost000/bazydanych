@@ -50,7 +50,7 @@ class SkladnikiWidokModel:
                 self.__con.close()
             return self.__skladnik
 
-    def createSkladnik(self, skladnik):
+    def create(self, skladnik):
         try:
             self.__con = lite.connect(self.__path)
             self.__cur = self.__con.cursor()

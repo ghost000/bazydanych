@@ -50,7 +50,7 @@ class ZamowieniaWidokModel:
                 self.__con.close()
             return self.__zamowienie
 
-    def createZamowienie(self, zamowienie):
+    def create(self, zamowienie):
         try:
             self.__con = lite.connect(self.__path)
             self.__cur = self.__con.cursor()

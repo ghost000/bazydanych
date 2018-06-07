@@ -50,7 +50,7 @@ class PizzaWidokModel:
                 self.__con.close()
             return self.__pizza
 
-    def createPizza(self, pizza):
+    def create(self, pizza):
         try:
             self.__con = lite.connect(self.__path)
             self.__cur = self.__con.cursor()

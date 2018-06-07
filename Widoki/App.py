@@ -9,8 +9,9 @@ from ModelWidoku.ZawartoscModelWidoku import ZawartoscWidokModel
 from Widoki.Dodaj import Dodaj
 
 
-class App( object):
+class App(tk.Tk):
     def __init__(self, master, title="Super Pizza"):
+        #tk.Tk.__init__(self)
         self.master = master
         self.tabKlienci = []
         self.tabPizza = []
@@ -22,12 +23,8 @@ class App( object):
         self.master.title(title)
         self.setGeometry()
         self.dzialamyNaFrame()
-
-    def close_windows(self):
-        self.master.destroy()
-
-    def run(self):
-        self.master.mainloop()
+        self.newWindow = None
+        self.app = None
 
     def setGeometry(self):
         self.master.update()
@@ -124,7 +121,6 @@ class App( object):
     def Dodaj(self):
         self.newWindow = tk.Toplevel(self.master)
         self.app = Dodaj(self.newWindow, self.danaTabela)
-        self.app.run()
 
     def Edytuj(self):
         pass
