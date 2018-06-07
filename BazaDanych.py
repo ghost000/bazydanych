@@ -1,5 +1,7 @@
 # !/usr/bin/python
 from Widoki.App import App
+import Tkinter as tk
 
-app = App()
+root = tk.Tk()
+app = App(root)
 app.run()
