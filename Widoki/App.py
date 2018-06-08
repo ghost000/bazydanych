@@ -11,7 +11,6 @@ from Widoki.Dodaj import Dodaj
 
 class App(tk.Tk):
     def __init__(self, master, title="Super Pizza"):
-        #tk.Tk.__init__(self)
         self.master = master
         self.tabKlienci = []
         self.tabPizza = []

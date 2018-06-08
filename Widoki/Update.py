@@ -11,11 +11,12 @@ from ModelWidoku.SkladnikiModelWidoku import SkladnikiWidokModel
 from ModelWidoku.ZamowieniaModelWidoku import ZamowieniaWidokModel
 
 class Dodaj(tk.Tk):
-    def __init__(self, master, danaTabela):
+    def __init__(self, master, danaTabela, obj):
         self.master = master
         self.tab = []
         self.danaTabela = danaTabela
         self.wielkiIfiacz()
+        self.obj = obj
 
     def close_windows(self):
         self.master.destroy()
@@ -42,7 +43,7 @@ class Dodaj(tk.Tk):
             self.tab.append(tk.Entry(bottomframe3, bd=5).pack(side=tk.RIGHT))
             tk.Label(bottomframe4, text="telefon: ").pack(side=tk.LEFT)
             self.tab.append(tk.Entry(bottomframe4, bd=5).pack(side = tk.RIGHT))
-            greenbutton = tk.Button(bottomframe5, text="DODAJ", fg="Brown", command = self.createKlient)
+            greenbutton = tk.Button(bottomframe5, text="UPDATE", fg="Brown", command = self.createKlient)
             greenbutton.pack(side=tk.LEFT)
 
         elif self.danaTabela == "Pizza":
@@ -54,7 +55,7 @@ class Dodaj(tk.Tk):
             self.tab.append(tk.Entry(bottomframe3, bd=5).pack(side = tk.RIGHT))
             tk.Label(bottomframe4, text="srednica: ").pack(side=tk.LEFT)
             self.tab.append(tk.Entry(bottomframe4, bd=5).pack(side = tk.RIGHT))
-            greenbutton = tk.Button(bottomframe5, text="DODAJ", fg="brown", command = self.createPizza)
+            greenbutton = tk.Button(bottomframe5, text="UPDATE", fg="brown", command = self.createPizza)
             greenbutton.pack(side=tk.LEFT)
 
         elif self.danaTabela == "Skladniki":
@@ -64,7 +65,7 @@ class Dodaj(tk.Tk):
             self.tab.append(tk.Entry(bottomframe2, bd=5).pack(side = tk.RIGHT))
             tk.Label(bottomframe3, text="koszt: ").pack(side=tk.LEFT)
             self.tab.append(tk.Entry(bottomframe3, bd=5).pack(side = tk.RIGHT))
-            greenbutton = tk.Button(bottomframe4, text="DODAJ", fg="brown", command = self.createSkladnik())
+            greenbutton = tk.Button(bottomframe4, text="UPDATE", fg="brown", command = self.createSkladnik())
             greenbutton.pack(side=tk.LEFT)
 
         elif self.danaTabela == "Zamowienia":
@@ -74,7 +75,7 @@ class Dodaj(tk.Tk):
             self.tab.append(tk.Entry(bottomframe2, bd=5).pack(side = tk.RIGHT))
             tk.Label(bottomframe3, text="dataDost: ").pack(side=tk.LEFT)
             self.tab.append(tk.Entry(bottomframe3, bd=5).pack(side = tk.RIGHT))
-            greenbutton = tk.Button(bottomframe4, text="DODAJ", fg="brown", command = self.createZamowienia)
+            greenbutton = tk.Button(bottomframe4, text="UPDATE", fg="brown", command = self.createZamowienia)
             greenbutton.pack(side=tk.LEFT)
 
         elif self.danaTabela == "Zawartosc":
