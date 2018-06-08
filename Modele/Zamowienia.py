@@ -1,5 +1,6 @@
 from datetime import date
 
+
 class Zamowienia:
     def __init__(self, sztuk=-1, idZam=-1, dataZam=date.max, dataDost=date.max, idPizza=-1, idKlienta=-1):
         self.sztuk = sztuk

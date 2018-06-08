@@ -1,5 +1,5 @@
 class Skladniki:
-    def __init__(self, nazwa = "", masa = -1, koszt = -1, idSkladnika = -1):
+    def __init__(self, nazwa="", masa=-1, koszt=-1, idSkladnika=-1):
         self.nazwa = nazwa
         self.masa = masa
         self.koszt = koszt

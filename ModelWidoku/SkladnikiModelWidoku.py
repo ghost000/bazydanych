@@ -1,11 +1,12 @@
-from Modele.Skladniki import Skladniki
 import sqlite3 as lite
 import sys
 
+from Modele.Skladniki import Skladniki
+
 
 class SkladnikiWidokModel:
-    def __init__(self, skladniki= None, skladnik = None, con = None, cur = None,
-                 path ='Database/RadoslawMadrzakBazaDanych.sqlite3'):
+    def __init__(self, skladniki=None, skladnik=None, con=None, cur=None,
+                 path='Database/RadoslawMadrzakBazaDanych.sqlite3'):
         if skladniki is None:
             skladniki = []
 

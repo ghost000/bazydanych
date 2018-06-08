@@ -1,5 +1,5 @@
 class Klient:
-    def __init__(self, nazwa = "", ulica = "", miejscowosc = "", telefon = -1, idKlienta = -1):
+    def __init__(self, nazwa="", ulica="", miejscowosc="", telefon=-1, idKlienta=-1):
         self.nazwa = nazwa
         self.ulica = ulica
         self.miejscowosc = miejscowosc

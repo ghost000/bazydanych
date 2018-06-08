@@ -1,11 +1,12 @@
-from Modele.Zamowienia import Zamowienia
 import sqlite3 as lite
 import sys
 
+from Modele.Zamowienia import Zamowienia
+
 
 class ZamowieniaWidokModel:
-    def __init__(self, zamowienia= None, zamowienie = None, con = None, cur = None,
-                 path ='Database/RadoslawMadrzakBazaDanych.sqlite3'):
+    def __init__(self, zamowienia=None, zamowienie=None, con=None, cur=None,
+                 path='Database/RadoslawMadrzakBazaDanych.sqlite3'):
         if zamowienia is None:
             zamowienia = []
 

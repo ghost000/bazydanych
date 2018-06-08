@@ -5,9 +5,8 @@ from ModelWidoku.PizzaModelWidoku import PizzaWidokModel
 from ModelWidoku.SkladnikiModelWidoku import SkladnikiWidokModel
 from ModelWidoku.ZamowieniaModelWidoku import ZamowieniaWidokModel
 from ModelWidoku.ZawartoscModelWidoku import ZawartoscWidokModel
-
 from Widoki.Dodaj import Dodaj
-
+from Widoki.Update import Update
 
 class App(tk.Tk):
     def __init__(self, master, title="Super Pizza"):
@@ -52,10 +51,12 @@ class App(tk.Tk):
 
         self.scrollBar.config(command=self.mylist.yview)
 
-        klientButton = tk.Button(frame, width=self.master.winfo_width() // 6, text="Klient", fg="red", command=self.klienci)
+        klientButton = tk.Button(frame, width=self.master.winfo_width() // 6, text="Klient", fg="red",
+                                 command=self.klienci)
         klientButton.pack(side=tk.LEFT)
 
-        PizzaButton = tk.Button(frame, width=self.master.winfo_width() // 6, text="Pizza", fg="brown", command=self.Pizza)
+        PizzaButton = tk.Button(frame, width=self.master.winfo_width() // 6, text="Pizza", fg="brown",
+                                command=self.Pizza)
         PizzaButton.pack(side=tk.LEFT)
 
         SkladnikiButton = tk.Button(frame, width=self.master.winfo_width() // 6, text="Skladiki", fg="blue",
@@ -70,13 +71,16 @@ class App(tk.Tk):
                                     command=self.Zawartosc)
         ZawartoscButton.pack(side=tk.LEFT)
 
-        DodajButton = tk.Button(bottomframe, width=self.master.winfo_width() // 4, text="Dodaj", fg="black", command=self.Dodaj)
+        DodajButton = tk.Button(bottomframe, width=self.master.winfo_width() // 4, text="Dodaj", fg="black",
+                                command=self.Dodaj)
         DodajButton.pack(side=tk.LEFT)
 
-        EdytujButton = tk.Button(bottomframe, width=self.master.winfo_width() // 4, text="Edytuj", fg="black", command=self.Edytuj)
+        EdytujButton = tk.Button(bottomframe, width=self.master.winfo_width() // 4, text="Edytuj", fg="black",
+                                 command=self.Edytuj)
         EdytujButton.pack(side=tk.LEFT)
 
-        UsunButton = tk.Button(bottomframe, width=self.master.winfo_width() // 4, text="Usun", fg="magenta", command=self.Usun)
+        UsunButton = tk.Button(bottomframe, width=self.master.winfo_width() // 4, text="Usun", fg="magenta",
+                               command=self.Usun)
         UsunButton.pack(side=tk.LEFT)
 
     def klienci(self):
@@ -122,7 +126,8 @@ class App(tk.Tk):
         self.app = Dodaj(self.newWindow, self.danaTabela)
 
     def Edytuj(self):
-        pass
+        self.newWindow = tk.Toplevel(self.master)
+        self.app = Update(self.newWindow, self.danaTabela)
 
     def Usun(self):
         pass
@@ -136,16 +141,16 @@ class App(tk.Tk):
 
         for element in obj1.getKlienci():
             self.tabKlienci.append(element)
-            #print(element)
+            # print(element)
         for element in obj2.getPizze():
             self.tabPizza.append(element)
-            #print(element)
+            # print(element)
         for element in obj3.getSkladniki():
             self.tabSkladniki.append(element)
-            #print(element)
+            # print(element)
         for element in obj4.getZamowienia():
             self.tabZamowienia.append(element)
-            #print(element)
+            # print(element)
         for element in obj5.getZawartosci():
             self.tabZawartosci.append(element)
-            #print(element)
+            # print(element)

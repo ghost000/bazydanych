@@ -1,6 +1,7 @@
-from Modele.Zawartosc import Zawartosc
 import sqlite3 as lite
 import sys
+
+from Modele.Zawartosc import Zawartosc
 
 
 class ZawartoscWidokModel:

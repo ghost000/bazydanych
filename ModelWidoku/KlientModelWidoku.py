@@ -1,15 +1,16 @@
-from Modele.Klient import Klient
 import sqlite3 as lite
 import sys
 
+from Modele.Klient import Klient
+
 
 class KlientWidokModel():
-    def __init__(self, klienci= None, klient = None, con = None, cur = None,
-                 path ='Database/RadoslawMadrzakBazaDanych.sqlite3'):
+    def __init__(self, klienci=None, klient=None, con=None, cur=None,
+                 path='Database/RadoslawMadrzakBazaDanych.sqlite3'):
         if klienci is None:
             klienci = []
 
-        self.klienci = klienci #model widoku
+        self.klienci = klienci  # model widoku
         self.klient = klient
         self.con = con
         self.cur = cur
@@ -56,7 +57,7 @@ class KlientWidokModel():
             self.cur = self.con.cursor()
             self.cur.execute('''INSERT INTO KLIENT(ULICA,NAZWA,MIEJSCOWOSC,TELEFON,ID_KLIENTA) 
                                   VALUES (?,?,?,?,?)''',
-                        (klient.nazwa, klient.ulica, klient.miejscowosc, klient.telefon, klient.idKlienta))
+                             (klient.nazwa, klient.ulica, klient.miejscowosc, klient.telefon, klient.idKlienta))
             self.con.commit()
         except lite.Error, e:
             print "Error %s:" % e.args[0]
@@ -72,7 +73,7 @@ class KlientWidokModel():
             self.cur = self.con.cursor()
             self.cur.execute('''UPDATE KLIENT SET (ULICA,NAZWA,MIEJSCOWOSC,TELEFON) 
                                   VALUES (?,?,?,?) WHERE ID_KLIENTA = ?''',
-                        (klient.nazwa, klient.ulica, klient.miejscowosc, klient.telefon, klient.idKlienta))
+                             (klient.nazwa, klient.ulica, klient.miejscowosc, klient.telefon, klient.idKlienta))
             self.con.commit()
 
         except lite.Error, e:

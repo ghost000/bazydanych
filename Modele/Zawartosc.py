@@ -1,5 +1,5 @@
 class Zawartosc:
-    def __init__(self, idZawartosc = -1, idSkladnika = -1, idPizza = -1):
+    def __init__(self, idZawartosc=-1, idSkladnika=-1, idPizza=-1):
         self.idZawartosc = idZawartosc
         self.idSkladnika = idSkladnika
         self.idPizza = idPizza

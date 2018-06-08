@@ -1,11 +1,12 @@
-from Modele.Pizza import Pizza
 import sqlite3 as lite
 import sys
+
+from Modele.Pizza import Pizza
 
 
 class PizzaWidokModel:
     def __init__(self, pizze=None, pizza=None, con=None, cur=None,
-                 path ='Database/RadoslawMadrzakBazaDanych.sqlite3'):
+                 path='Database/RadoslawMadrzakBazaDanych.sqlite3'):
         if pizze is None:
             pizze = []
 
