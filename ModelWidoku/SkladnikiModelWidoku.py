@@ -10,91 +10,91 @@ class SkladnikiWidokModel:
         if skladniki is None:
             skladniki = []
 
-        self.__skladniki = skladniki
-        self.__skladnik = skladnik
-        self.__con = con
-        self.__cur = cur
-        self.__path = path
+        self.skladniki = skladniki
+        self.skladnik = skladnik
+        self.con = con
+        self.cur = cur
+        self.path = path
 
     def getSkladniki(self):
         try:
-            self.__con = lite.connect(self.__path)
-            self.__cur = self.__con.cursor()
-            self.__cur.execute('''SELECT * FROM SKLADNIKI''')
-            __data = self.__cur.fetchall()
-            for element in __data:
-                self.__skladniki.append(Skladniki(*element))
+            self.con = lite.connect(self.path)
+            self.cur = self.con.cursor()
+            self.cur.execute('''SELECT * FROM SKLADNIKI''')
+            data = self.cur.fetchall()
+            for element in data:
+                self.skladniki.append(Skladniki(*element))
 
         except lite.Error, e:
             print "Error %s:" % e.args[0]
             sys.exit(1)
 
         finally:
-            if self.__con:
-                self.__con.close()
-            return self.__skladniki
+            if self.con:
+                self.con.close()
+            return self.skladniki
 
     def getSkladnik(self, skladnik):
         try:
-            self.__con = lite.connect(self.__path)
-            self.__cur = self.__con.cursor()
-            self.__cur.execute('''SELECT * FROM SKLADNIKI WHERE ID_SKLADNIKA = ?''', (skladnik.__idSkladnika,))
-            __data = self.__cur.fetchone()
-            self.__skladnik = Skladniki(*__data)
+            self.con = lite.connect(self.path)
+            self.cur = self.con.cursor()
+            self.cur.execute('''SELECT * FROM SKLADNIKI WHERE ID_SKLADNIKA = ?''', (skladnik.idSkladnika,))
+            data = self.cur.fetchone()
+            self.skladnik = Skladniki(*data)
 
         except lite.Error, e:
             print "Error %s:" % e.args[0]
             sys.exit(1)
 
         finally:
-            if self.__con:
-                self.__con.close()
-            return self.__skladnik
+            if self.con:
+                self.con.close()
+            return self.skladnik
 
     def create(self, skladnik):
         try:
-            self.__con = lite.connect(self.__path)
-            self.__cur = self.__con.cursor()
-            self.__cur.execute('''INSERT INTO SKLADNIKI(NAZWA,MASA,KOSZT,ID_SKLADNIKA) 
-                                  VALUES (?,?,?,?)''',
-                               (skladnik.__nazwa, skladnik.__masa, skladnik.__koszt, skladnik.__idSkladnika))
-            self.__con.commit()
+            self.con = lite.connect(self.path)
+            self.cur = self.con.cursor()
+            self.cur.execute('''INSERT INTO SKLADNIKI(NAZWA,MASA,KOSZT) 
+                                  VALUES (?,?,?)''',
+                               (skladnik.nazwa, skladnik.masa, skladnik.koszt))
+            self.con.commit()
         except lite.Error, e:
             print "Error %s:" % e.args[0]
             sys.exit(1)
 
         finally:
-            if self.__con:
-                self.__con.close()
+            if self.con:
+                self.con.close()
 
     def updateSkladnik(self, skladnik):
         try:
-            self.__con = lite.connect(self.__path)
-            self.__cur = self.__con.cursor()
-            self.__cur.execute('''UPDATE SKLADNIKI SET (NAZWA,MASA,KOSZT) 
+            self.con = lite.connect(self.path)
+            self.cur = self.con.cursor()
+            self.cur.execute('''UPDATE SKLADNIKI SET (NAZWA,MASA,KOSZT) 
                                   VALUES (?,?,?) WHERE ID_SKLADNIKA = ?''',
-                               (skladnik.__nazwa, skladnik.__masa, skladnik.__koszt, skladnik.__idSkladnika))
-            self.__con.commit()
+                               (skladnik.nazwa, skladnik.masa, skladnik.koszt, skladnik.idSkladnika))
+            self.con.commit()
 
         except lite.Error, e:
             print "Error %s:" % e.args[0]
             sys.exit(1)
 
         finally:
-            if self.__con:
-                self.__con.close()
+            if self.con:
+                self.con.close()
 
     def deleteSkladnik(self, skladnik):
         try:
-            self.__con = lite.connect(self.__path)
-            self.__cur = self.__con.cursor()
-            self.__cur.execute('''DELETE FROM SKLADNIKI WHERE ID_SKLADNIKA = ?''', (skladnik.__idSkladnika,))
-            self.__con.commit()
+            self.con = lite.connect(self.path)
+            self.cur = self.con.cursor()
+            self.cur.execute('''DELETE FROM SKLADNIKI WHERE ID_SKLADNIKA = ?''', (skladnik.idSkladnika,))
+            self.con.commit()
 
         except lite.Error, e:
             print "Error %s:" % e.args[0]
             sys.exit(1)
 
         finally:
-            if self.__con:
-                self.__con.close()
+            if self.con:
+                self.con.close()

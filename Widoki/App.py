@@ -8,6 +8,7 @@ from ModelWidoku.ZawartoscModelWidoku import ZawartoscWidokModel
 from Widoki.Dodaj import Dodaj
 from Widoki.Update import Update
 
+
 class App(tk.Tk):
     def __init__(self, master, title="Super Pizza"):
         self.master = master
@@ -51,37 +52,32 @@ class App(tk.Tk):
 
         self.scrollBar.config(command=self.mylist.yview)
 
-        klientButton = tk.Button(frame, width=self.master.winfo_width() // 6, text="Klient", fg="red",
-                                 command=self.klienci)
-        klientButton.pack(side=tk.LEFT)
+        tk.Button(frame, width=self.master.winfo_width() // 6, text="Klient", fg="red",
+                  command=self.klienci).pack(side=tk.LEFT)
 
-        PizzaButton = tk.Button(frame, width=self.master.winfo_width() // 6, text="Pizza", fg="brown",
-                                command=self.Pizza)
-        PizzaButton.pack(side=tk.LEFT)
+        tk.Button(frame, width=self.master.winfo_width() // 6, text="Pizza", fg="brown",
+                  command=self.Pizza).pack(side=tk.LEFT)
 
-        SkladnikiButton = tk.Button(frame, width=self.master.winfo_width() // 6, text="Skladiki", fg="blue",
-                                    command=self.Skladniki)
-        SkladnikiButton.pack(side=tk.LEFT)
+        tk.Button(frame, width=self.master.winfo_width() // 6, text="Skladiki", fg="blue",
+                  command=self.Skladniki).pack(side=tk.LEFT)
 
-        ZamowieniaButton = tk.Button(frame, width=self.master.winfo_width() // 6, text="Zamowienia", fg="black",
-                                     command=self.Zamowienia)
-        ZamowieniaButton.pack(side=tk.LEFT)
+        tk.Button(frame, width=self.master.winfo_width() // 6, text="Zamowienia", fg="black",
+                  command=self.Zamowienia).pack(side=tk.LEFT)
 
-        ZawartoscButton = tk.Button(frame, width=self.master.winfo_width() // 6, text="Zawartosc", fg="green",
-                                    command=self.Zawartosc)
-        ZawartoscButton.pack(side=tk.LEFT)
+        tk.Button(frame, width=self.master.winfo_width() // 6, text="Zawartosc", fg="green",
+                  command=self.Zawartosc).pack(side=tk.LEFT)
 
-        DodajButton = tk.Button(bottomframe, width=self.master.winfo_width() // 4, text="Dodaj", fg="black",
-                                command=self.Dodaj)
-        DodajButton.pack(side=tk.LEFT)
+        tk.Button(bottomframe, width=self.master.winfo_width() // 4, text="Dodaj", fg="black",
+                  command=self.Dodaj).pack(side=tk.LEFT)
 
-        EdytujButton = tk.Button(bottomframe, width=self.master.winfo_width() // 4, text="Edytuj", fg="black",
-                                 command=self.Edytuj)
-        EdytujButton.pack(side=tk.LEFT)
+        tk.Button(bottomframe, width=self.master.winfo_width() // 4, text="Edytuj", fg="black",
+                  command=self.Edytuj).pack(side=tk.LEFT)
 
-        UsunButton = tk.Button(bottomframe, width=self.master.winfo_width() // 4, text="Usun", fg="magenta",
-                               command=self.Usun)
-        UsunButton.pack(side=tk.LEFT)
+        tk.Button(bottomframe, width=self.master.winfo_width() // 4, text="Usun", fg="magenta",
+                  command=self.Usun).pack(side=tk.LEFT)
+
+        tk.Button(bottomframe, width=self.master.winfo_width() // 4, text="Odswiez", fg="black",
+                  command=self.Odswiez).pack(side=tk.LEFT)
 
     def klienci(self):
         self.danaTabela = "Klienci"
@@ -132,12 +128,31 @@ class App(tk.Tk):
     def Usun(self):
         pass
 
+    def Odswiez(self):
+        self.zaczytajDane()
+        if self.danaTabela == "Klienci":
+            self.klienci()
+        elif self.danaTabela == "Pizza":
+            self.Pizza()
+        elif self.danaTabela == "Skladniki":
+            self.Skladniki()
+        elif self.danaTabela == "Zamowienia":
+            self.Zamowienia()
+        elif self.danaTabela == "Zawartosc":
+            self.Zawartosc()
+
     def zaczytajDane(self):
         obj1 = KlientWidokModel()
         obj2 = PizzaWidokModel()
         obj3 = SkladnikiWidokModel()
         obj4 = ZamowieniaWidokModel()
         obj5 = ZawartoscWidokModel()
+
+        self.tabKlienci = []
+        self.tabPizza = []
+        self.tabSkladniki = []
+        self.tabZamowienia = []
+        self.tabZawartosci = []
 
         for element in obj1.getKlienci():
             self.tabKlienci.append(element)
@@ -154,3 +169,33 @@ class App(tk.Tk):
         for element in obj5.getZawartosci():
             self.tabZawartosci.append(element)
             # print(element)
+
+    def zaczytajKlient(self):
+        obj1 = KlientWidokModel()
+        self.tabKlienci = []
+        for element in obj1.getKlienci():
+            self.tabKlienci.append(element)
+
+    def zaczytajPizza(self):
+        obj2 = PizzaWidokModel()
+        self.tabPizza = []
+        for element in obj2.getPizze():
+            self.tabPizza.append(element)
+
+    def zaczytajSkladniki(self):
+        obj3 = SkladnikiWidokModel()
+        self.tabSkladniki = []
+        for element in obj3.getSkladniki():
+            self.tabSkladniki.append(element)
+
+    def zaczytajZamowinia(self):
+        obj4 = ZamowieniaWidokModel()
+        self.tabZamowienia = []
+        for element in obj4.getZamowienia():
+            self.tabZamowienia.append(element)
+
+    def zaczytajZawartosci(self):
+        obj5 = ZawartoscWidokModel()
+        self.tabZawartosci = []
+        for element in obj5.getZawartosci():
+            self.tabZamowienia.append(element)

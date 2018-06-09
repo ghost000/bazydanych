@@ -10,7 +10,7 @@ class KlientWidokModel():
         if klienci is None:
             klienci = []
 
-        self.klienci = klienci  # model widoku
+        self.klienci = klienci
         self.klient = klient
         self.con = con
         self.cur = cur
@@ -55,9 +55,9 @@ class KlientWidokModel():
         try:
             self.con = lite.connect(self.path)
             self.cur = self.con.cursor()
-            self.cur.execute('''INSERT INTO KLIENT(ULICA,NAZWA,MIEJSCOWOSC,TELEFON,ID_KLIENTA) 
-                                  VALUES (?,?,?,?,?)''',
-                             (klient.nazwa, klient.ulica, klient.miejscowosc, klient.telefon, klient.idKlienta))
+            self.cur.execute('''INSERT INTO KLIENT(ULICA,NAZWA,MIEJSCOWOSC,TELEFON) 
+                                  VALUES (?,?,?,?)''',
+                             (klient.nazwa, klient.ulica, klient.miejscowosc, klient.telefon))
             self.con.commit()
         except lite.Error, e:
             print "Error %s:" % e.args[0]

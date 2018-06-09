@@ -4,16 +4,19 @@ from ModelWidoku.KlientModelWidoku import KlientWidokModel
 from ModelWidoku.PizzaModelWidoku import PizzaWidokModel
 from ModelWidoku.SkladnikiModelWidoku import SkladnikiWidokModel
 from ModelWidoku.ZamowieniaModelWidoku import ZamowieniaWidokModel
+
 from Modele.Klient import Klient
 from Modele.Pizza import Pizza
 from Modele.Skladniki import Skladniki
 from Modele.Zamowienia import Zamowienia
 
+from datetime import date
+import time
 
 class Dodaj(tk.Tk):
     def __init__(self, master, danaTabela):
         self.master = master
-        self.tab = []
+        self.tab = {}
         self.danaTabela = danaTabela
         self.wielkiIfiacz()
 
@@ -35,45 +38,62 @@ class Dodaj(tk.Tk):
 
         if self.danaTabela == "Klienci":
             tk.Label(bottomframe1, text="Nazwa: ").pack(side=tk.LEFT)
-            self.tab.append(tk.Entry(bottomframe1, bd=5).pack(side=tk.RIGHT))
+            self.tab[0] = tk.Entry(bottomframe1, bd=5)
+            self.tab[0].pack(side=tk.RIGHT)
             tk.Label(bottomframe2, text="ulica: ").pack(side=tk.LEFT)
-            self.tab.append(tk.Entry(bottomframe2, bd=5).pack(side=tk.RIGHT))
+            self.tab[1] = tk.Entry(bottomframe2, bd=5)
+            self.tab[1].pack(side=tk.RIGHT)
             tk.Label(bottomframe3, text="miejscowosc: ").pack(side=tk.LEFT)
-            self.tab.append(tk.Entry(bottomframe3, bd=5).pack(side=tk.RIGHT))
+            self.tab[2] = tk.Entry(bottomframe3, bd=5)
+            self.tab[2].pack(side=tk.RIGHT)
             tk.Label(bottomframe4, text="telefon: ").pack(side=tk.LEFT)
-            self.tab.append(tk.Entry(bottomframe4, bd=5).pack(side=tk.RIGHT))
+            self.tab[3] = tk.Entry(bottomframe4, bd=5)
+            self.tab[3].pack(side=tk.RIGHT)
             greenbutton = tk.Button(bottomframe5, text="DODAJ", fg="Brown", command=self.createKlient)
             greenbutton.pack(side=tk.LEFT)
 
         elif self.danaTabela == "Pizza":
             tk.Label(bottomframe1, text="Nazwa: ").pack(side=tk.LEFT)
-            self.tab.append(tk.Entry(bottomframe1, bd=5).pack(side=tk.RIGHT))
+            self.tab[0] = tk.Entry(bottomframe1, bd=5)
+            self.tab[0].pack(side=tk.RIGHT)
             tk.Label(bottomframe2, text="opis: ").pack(side=tk.LEFT)
-            self.tab.append(tk.Entry(bottomframe2, bd=5).pack(side=tk.RIGHT))
+            self.tab[1] = tk.Entry(bottomframe2, bd=5)
+            self.tab[1].pack(side=tk.RIGHT)
             tk.Label(bottomframe3, text="cena: ").pack(side=tk.LEFT)
-            self.tab.append(tk.Entry(bottomframe3, bd=5).pack(side=tk.RIGHT))
+            self.tab[2] = tk.Entry(bottomframe3, bd=5)
+            self.tab[2].pack(side=tk.RIGHT)
             tk.Label(bottomframe4, text="srednica: ").pack(side=tk.LEFT)
-            self.tab.append(tk.Entry(bottomframe4, bd=5).pack(side=tk.RIGHT))
+            self.tab[3] = tk.Entry(bottomframe4, bd=5)
+            self.tab[3].pack(side=tk.RIGHT)
             greenbutton = tk.Button(bottomframe5, text="DODAJ", fg="brown", command=self.createPizza)
             greenbutton.pack(side=tk.LEFT)
 
         elif self.danaTabela == "Skladniki":
             tk.Label(bottomframe1, text="Nazwa: ").pack(side=tk.LEFT)
-            self.tab.append(tk.Entry(bottomframe1, bd=5).pack(side=tk.RIGHT))
+            self.tab[0] = tk.Entry(bottomframe1, bd=5)
+            self.tab[0].pack(side=tk.RIGHT)
             tk.Label(bottomframe2, text="masa: ").pack(side=tk.LEFT)
-            self.tab.append(tk.Entry(bottomframe2, bd=5).pack(side=tk.RIGHT))
+            self.tab[1] = tk.Entry(bottomframe2, bd=5)
+            self.tab[1].pack(side=tk.RIGHT)
             tk.Label(bottomframe3, text="koszt: ").pack(side=tk.LEFT)
-            self.tab.append(tk.Entry(bottomframe3, bd=5).pack(side=tk.RIGHT))
+            self.tab[2] = tk.Entry(bottomframe3, bd=5)
+            self.tab[2].pack(side=tk.RIGHT)
             greenbutton = tk.Button(bottomframe4, text="DODAJ", fg="brown", command=self.createSkladnik())
             greenbutton.pack(side=tk.LEFT)
 
         elif self.danaTabela == "Zamowienia":
             tk.Label(bottomframe1, text="sztuk: ").pack(side=tk.LEFT)
-            self.tab.append(tk.Entry(bottomframe1, bd=5).pack(side=tk.RIGHT))
+            self.tab[0] = tk.Entry(bottomframe1, bd=5)
+            self.tab[0].pack(side=tk.RIGHT)
+            today = time.asctime(time.localtime(time.time()))
+            num1 = tk.StringVar()
+            num1.set(today)
             tk.Label(bottomframe2, text="dataZam: ").pack(side=tk.LEFT)
-            self.tab.append(tk.Entry(bottomframe2, bd=5).pack(side=tk.RIGHT))
+            self.tab[1] = tk.Entry(bottomframe2, bd=5, textvariable = num1)
+            self.tab[1].pack(side=tk.RIGHT)
             tk.Label(bottomframe3, text="dataDost: ").pack(side=tk.LEFT)
-            self.tab.append(tk.Entry(bottomframe3, bd=5).pack(side=tk.RIGHT))
+            self.tab[2] = tk.Entry(bottomframe3, bd=5, textvariable = num1)
+            self.tab[2].pack(side=tk.RIGHT)
             greenbutton = tk.Button(bottomframe4, text="DODAJ", fg="brown", command=self.createZamowienia)
             greenbutton.pack(side=tk.LEFT)
 
@@ -87,7 +107,7 @@ class Dodaj(tk.Tk):
         objekt.miejscowosc = self.tab[2].get()
         objekt.telefon = self.tab[3].get()
         k = KlientWidokModel()
-        self.create(k, objekt)
+        k.create(objekt)
 
     def createPizza(self):
         objekt = Pizza()
@@ -96,7 +116,7 @@ class Dodaj(tk.Tk):
         objekt.cena = self.tab[2].get()
         objekt.srednica = self.tab[3].get()
         p = PizzaWidokModel()
-        self.create(p, objekt)
+        p.create(objekt)
 
     def createSkladnik(self):
         objekt = Skladniki()
@@ -104,7 +124,7 @@ class Dodaj(tk.Tk):
         objekt.masa = self.tab[1].get()
         objekt.koszt = self.tab[2].get()
         s = SkladnikiWidokModel()
-        self.create(s, objekt)
+        s.create(objekt)
 
     def createZamowienia(self):
         objekt = Zamowienia()
@@ -112,4 +132,4 @@ class Dodaj(tk.Tk):
         objekt.dataZam = self.tab[1].get()
         objekt.dataDost = self.tab[2].get()
         z = ZamowieniaWidokModel()
-        self.create(z, objekt)
+        z.create(objekt)
