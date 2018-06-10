@@ -71,8 +71,8 @@ class ZawartoscWidokModel:
         try:
             self.con = lite.connect(self.path)
             self.cur = self.con.cursor()
-            self.cur.execute('''UPDATE ZAWARTOSC SET (ID_SKLADNIKA,ID_PIZZA) 
-                                  VALUES (?,?) WHERE ID_ZAWARTOSC = ?''',
+            self.cur.execute('''UPDATE ZAWARTOSC SET ID_SKLADNIKA = ? ,ID_PIZZA = ? 
+                                WHERE ID_ZAWARTOSC = ?''',
                                (zawartosc.idSkladnika, zawartosc.idPizza, zawartosc.idZawartosc))
             self.con.commit()
 

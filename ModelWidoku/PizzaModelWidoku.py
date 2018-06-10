@@ -71,8 +71,8 @@ class PizzaWidokModel:
         try:
             self.con = lite.connect(self.path)
             self.cur = self.con.cursor()
-            self.cur.execute('''UPDATE PIZZA SET (NAZWA,OPIS,CENA,SREDNICA) 
-                                  VALUES (?,?,?,?) WHERE ID_PIZZA = ?''',
+            self.cur.execute('''UPDATE PIZZA SET NAZWA = ?,OPIS = ?,CENA = ?,SREDNICA = ? 
+                                  WHERE ID_PIZZA = ?''',
                                (pizza.nazwa, pizza.opis, pizza.cena, pizza.srednica, pizza.idPizza))
             self.con.commit()
 

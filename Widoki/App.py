@@ -24,6 +24,7 @@ class App(tk.Tk):
         self.dzialamyNaFrame()
         self.newWindow = None
         self.app = None
+        self.zaznaczone = None
 
     def setGeometry(self):
         self.master.update()
@@ -122,11 +123,37 @@ class App(tk.Tk):
         self.app = Dodaj(self.newWindow, self.danaTabela)
 
     def Edytuj(self):
-        self.newWindow = tk.Toplevel(self.master)
-        self.app = Update(self.newWindow, self.danaTabela)
+        self.zaznaczone = self.mylist.get(self.mylist.curselection())
+        if self.danaTabela == "Klienci":
+            tab = self.tabKlienci[self.mylist.curselection()[0]]
+        elif self.danaTabela == "Pizza":
+            tab = self.tabPizza[self.mylist.curselection()[0]]
+        elif self.danaTabela == "Skladniki":
+            tab = self.tabSkladniki[self.mylist.curselection()[0]]
+        elif self.danaTabela == "Zamowienia":
+            tab = self.tabZamowienia[self.mylist.curselection()[0]]
+        elif self.danaTabela == "Zawartosc":
+            tab = self.tabZawartosci[self.mylist.curselection()[0]]
+
+        self.newWindow2 = tk.Toplevel(self.master)
+        self.app2 = Update(self.newWindow2, self.danaTabela, tab)
 
     def Usun(self):
-        pass
+        if self.danaTabela == "Klienci":
+            obj1 = KlientWidokModel()
+            obj1.deleteKlient(self.tabKlienci[self.mylist.curselection()[0]])
+        elif self.danaTabela == "Pizza":
+            obj2 = PizzaWidokModel()
+            obj2.deletePizza(self.tabPizza[self.mylist.curselection()[0]])
+        elif self.danaTabela == "Skladniki":
+            obj3 = SkladnikiWidokModel()
+            obj3.deleteSkladnik(self.tabSkladniki[self.mylist.curselection()[0]])
+        elif self.danaTabela == "Zamowienia":
+            obj4 = ZamowieniaWidokModel()
+            obj4.deleteZamowienie(self.tabZamowienia[self.mylist.curselection()[0]])
+        elif self.danaTabela == "Zawartosc":
+            obj5 = ZawartoscWidokModel()
+            obj5.deleteZawartosc(self.tabZawartosci[self.mylist.curselection()[0]])
 
     def Odswiez(self):
         self.zaczytajDane()

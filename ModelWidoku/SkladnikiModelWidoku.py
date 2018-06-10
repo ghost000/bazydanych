@@ -71,8 +71,7 @@ class SkladnikiWidokModel:
         try:
             self.con = lite.connect(self.path)
             self.cur = self.con.cursor()
-            self.cur.execute('''UPDATE SKLADNIKI SET (NAZWA,MASA,KOSZT) 
-                                  VALUES (?,?,?) WHERE ID_SKLADNIKA = ?''',
+            self.cur.execute("UPDATE SKLADNIKI SET NAZWA=?,MASA=?,KOSZT=? WHERE _rowid_=? ;",
                                (skladnik.nazwa, skladnik.masa, skladnik.koszt, skladnik.idSkladnika))
             self.con.commit()
 

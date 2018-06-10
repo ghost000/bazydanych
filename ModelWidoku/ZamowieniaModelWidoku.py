@@ -72,10 +72,17 @@ class ZamowieniaWidokModel:
         try:
             self.con = lite.connect(self.path)
             self.cur = self.con.cursor()
-            self.cur.execute('''UPDATE ZAMOWIENIA SET (SZTUK,DATA_ZAM,DATA_DOSTARCZENIA,ID_PIZZA,ID_KLIENTA) 
-                                  VALUES (?,?,?,?,?) WHERE ID_ZAM = ?''',
-                               (zamowienie.sztuk, zamowienie.dataZam, zamowienie.dataDost, zamowienie.idPizza,
-                                zamowienie.idKlienta, zamowienie.idZam))
+            print(zamowienie)
+            self.cur.execute('''UPDATE ZAMOWIENIA SET SZTUK = ? WHERE ID_ZAM = ?''',
+                               (zamowienie.sztuk, zamowienie.idZam))
+            self.cur.execute('''UPDATE ZAMOWIENIA SET DATA_ZAM = ? WHERE ID_ZAM = ?''',
+                               (zamowienie.dataZam, zamowienie.idZam))
+            self.cur.execute('''UPDATE ZAMOWIENIA SET DATA_DOSTARCZENIA = ? WHERE ID_ZAM = ?''',
+                               (zamowienie.dataDost, zamowienie.idZam))
+            self.cur.execute('''UPDATE ZAMOWIENIA SET ID_PIZZA = ? WHERE ID_ZAM = ?''',
+                               (zamowienie.idPizza, zamowienie.idZam))
+            self.cur.execute('''UPDATE ZAMOWIENIA SET ID_KLIENTA = ? WHERE ID_ZAM = ?''',
+                               (zamowienie.idKlienta, zamowienie.idZam))
             self.con.commit()
 
         except lite.Error, e:

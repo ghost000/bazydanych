@@ -71,8 +71,8 @@ class KlientWidokModel():
         try:
             self.con = lite.connect(self.path)
             self.cur = self.con.cursor()
-            self.cur.execute('''UPDATE KLIENT SET (ULICA,NAZWA,MIEJSCOWOSC,TELEFON) 
-                                  VALUES (?,?,?,?) WHERE ID_KLIENTA = ?''',
+            self.cur.execute('''UPDATE KLIENT SET NAZWA= ?, ULICA=?, MIEJSCOWOSC=?, TELEFON=? 
+                                WHERE ID_KLIENTA =?''',
                              (klient.nazwa, klient.ulica, klient.miejscowosc, klient.telefon, klient.idKlienta))
             self.con.commit()
 
@@ -88,7 +88,7 @@ class KlientWidokModel():
         try:
             self.con = lite.connect(self.path)
             self.cur = self.con.cursor()
-            self.cur.execute('''DELETE FROM KLIENT WHERE ID_KLIENTA = ?''', (klient.__idKlienta,))
+            self.cur.execute('''DELETE FROM KLIENT WHERE ID_KLIENTA = ?''', (klient.idKlienta,))
             self.con.commit()
 
         except lite.Error, e:

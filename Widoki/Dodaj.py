@@ -29,12 +29,14 @@ class Dodaj(tk.Tk):
         bottomframe3 = tk.Frame(self.master)
         bottomframe4 = tk.Frame(self.master)
         bottomframe5 = tk.Frame(self.master)
+        bottomframe6 = tk.Frame(self.master)
 
         bottomframe1.pack()
         bottomframe2.pack()
         bottomframe3.pack()
         bottomframe4.pack()
         bottomframe5.pack()
+        bottomframe6.pack()
 
         if self.danaTabela == "Klienci":
             tk.Label(bottomframe1, text="Nazwa: ").pack(side=tk.LEFT)
@@ -78,7 +80,7 @@ class Dodaj(tk.Tk):
             tk.Label(bottomframe3, text="koszt: ").pack(side=tk.LEFT)
             self.tab[2] = tk.Entry(bottomframe3, bd=5)
             self.tab[2].pack(side=tk.RIGHT)
-            greenbutton = tk.Button(bottomframe4, text="DODAJ", fg="brown", command=self.createSkladnik())
+            greenbutton = tk.Button(bottomframe4, text="DODAJ", fg="brown", command=self.createSkladnik)
             greenbutton.pack(side=tk.LEFT)
 
         elif self.danaTabela == "Zamowienia":
@@ -94,7 +96,13 @@ class Dodaj(tk.Tk):
             tk.Label(bottomframe3, text="dataDost: ").pack(side=tk.LEFT)
             self.tab[2] = tk.Entry(bottomframe3, bd=5, textvariable = num1)
             self.tab[2].pack(side=tk.RIGHT)
-            greenbutton = tk.Button(bottomframe4, text="DODAJ", fg="brown", command=self.createZamowienia)
+            tk.Label(bottomframe4, text="idKlienta: ").pack(side=tk.LEFT)
+            self.tab[3] = tk.Entry(bottomframe4, bd=5)
+            self.tab[3].pack(side=tk.RIGHT)
+            tk.Label(bottomframe5, text="idPizza: ").pack(side=tk.LEFT)
+            self.tab[4] = tk.Entry(bottomframe5, bd=5)
+            self.tab[4].pack(side=tk.RIGHT)
+            greenbutton = tk.Button(bottomframe6, text="DODAJ", fg="brown", command=self.createZamowienia)
             greenbutton.pack(side=tk.LEFT)
 
         elif self.danaTabela == "Zawartosc":
@@ -131,5 +139,7 @@ class Dodaj(tk.Tk):
         objekt.sztuk = self.tab[0].get()
         objekt.dataZam = self.tab[1].get()
         objekt.dataDost = self.tab[2].get()
+        objekt.idKlienta = self.tab[3].get()
+        objekt.idPizza = self.tab[4].get()
         z = ZamowieniaWidokModel()
         z.create(objekt)
