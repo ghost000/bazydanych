@@ -55,7 +55,7 @@ class KlientWidokModel():
         try:
             self.con = lite.connect(self.path)
             self.cur = self.con.cursor()
-            self.cur.execute('''INSERT INTO KLIENT(ULICA,NAZWA,MIEJSCOWOSC,TELEFON) 
+            self.cur.execute('''INSERT INTO KLIENT(NAZWA,ULICA,MIEJSCOWOSC,TELEFON) 
                                   VALUES (?,?,?,?)''',
                              (klient.nazwa, klient.ulica, klient.miejscowosc, klient.telefon))
             self.con.commit()
@@ -71,7 +71,7 @@ class KlientWidokModel():
         try:
             self.con = lite.connect(self.path)
             self.cur = self.con.cursor()
-            self.cur.execute('''UPDATE KLIENT SET NAZWA= ?, ULICA=?, MIEJSCOWOSC=?, TELEFON=? 
+            self.cur.execute('''UPDATE KLIENT SET NAZWA=?, ULICA=?, MIEJSCOWOSC=?, TELEFON=? 
                                 WHERE ID_KLIENTA =?''',
                              (klient.nazwa, klient.ulica, klient.miejscowosc, klient.telefon, klient.idKlienta))
             self.con.commit()

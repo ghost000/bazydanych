@@ -94,7 +94,7 @@ class App(tk.Tk):
         for element in self.tabPizza:
             self.mylist.insert(tk.END, " Pizza nazwa: " + element.nazwa + " opis: " + element.opis + " cena: " +
                                str(element.cena) + " srednica: " + str(element.srednica) + " idPizza: " +
-                               str(element.idPizza))
+                               str(element.idPizza)  + " skladniki: " + str(element.skladniki))
 
     def Skladniki(self):
         self.danaTabela = "Skladniki"
@@ -120,7 +120,7 @@ class App(tk.Tk):
 
     def Dodaj(self):
         self.newWindow = tk.Toplevel(self.master)
-        self.app = Dodaj(self.newWindow, self.danaTabela)
+        self.app = Dodaj(self.newWindow, self.danaTabela, self.tabZamowienia, self.tabZawartosci)
 
     def Edytuj(self):
         self.zaznaczone = self.mylist.get(self.mylist.curselection())
@@ -136,7 +136,7 @@ class App(tk.Tk):
             tab = self.tabZawartosci[self.mylist.curselection()[0]]
 
         self.newWindow2 = tk.Toplevel(self.master)
-        self.app2 = Update(self.newWindow2, self.danaTabela, tab)
+        self.app2 = Update(self.newWindow2, self.danaTabela, tab,self.tabZamowienia, self.tabZawartosci)
 
     def Usun(self):
         if self.danaTabela == "Klienci":
@@ -225,4 +225,4 @@ class App(tk.Tk):
         obj5 = ZawartoscWidokModel()
         self.tabZawartosci = []
         for element in obj5.getZawartosci():
-            self.tabZamowienia.append(element)
+            self.tabZawartosci.append(element)

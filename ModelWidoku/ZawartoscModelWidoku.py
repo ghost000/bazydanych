@@ -24,6 +24,14 @@ class ZawartoscWidokModel:
             data = self.cur.fetchall()
             for element in data:
                 self.zawartosci.append(Zawartosc(*element))
+            self.cur.execute('''SELECT NAZWA, ID_SKLADNIKA FROM SKLADNIKI''')
+            data = self.cur.fetchall()
+            p = {}
+            j = 0
+            for i in data:
+                p[j] = (list(i))
+                j+=1
+            self.zawartosci[-1].skladniki = p
 
         except lite.Error, e:
             print "Error %s:" % e.args[0]
@@ -71,6 +79,7 @@ class ZawartoscWidokModel:
         try:
             self.con = lite.connect(self.path)
             self.cur = self.con.cursor()
+            print(zawartosc)
             self.cur.execute('''UPDATE ZAWARTOSC SET ID_SKLADNIKA = ? ,ID_PIZZA = ? 
                                 WHERE ID_ZAWARTOSC = ?''',
                                (zawartosc.idSkladnika, zawartosc.idPizza, zawartosc.idZawartosc))

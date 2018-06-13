@@ -9,6 +9,8 @@ class Zamowienia:
         self.dataDost = dataDost
         self.idPizza = idPizza
         self.idKlienta = idKlienta
+        self.klienci = {}
+        self.pizze = {}
 
     def __str__(self):
         return " Zamowienia sztuk: " + str(self.sztuk) + " idZam: " + str(self.idZam) + " dataZam: " + \

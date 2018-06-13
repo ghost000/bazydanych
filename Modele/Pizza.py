@@ -5,7 +5,8 @@ class Pizza:
         self.cena = cena
         self.srednica = srednica
         self.idPizza = idPizza
+        self.skladniki = ""
 
     def __str__(self):
         return " Pizza nazwa: " + self.nazwa + " opis: " + self.opis + " cena: " + str(self.cena) + \
-               " srednica: " + str(self.srednica) + " idPizza: " + str(self.idPizza)
+               " srednica: " + str(self.srednica) + " idPizza: " + str(self.idPizza) + " skladniki: " + self.skladniki

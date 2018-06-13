@@ -3,6 +3,7 @@ class Zawartosc:
         self.idZawartosc = idZawartosc
         self.idSkladnika = idSkladnika
         self.idPizza = idPizza
+        self.skladniki = {}
 
     def __str__(self):
         return " Zawartosc idZawartosc: " + str(self.idZawartosc) + " idSkladnika: " + str(self.idSkladnika) + \

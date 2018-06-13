@@ -24,6 +24,23 @@ class ZamowieniaWidokModel:
             data = self.cur.fetchall()
             for element in data:
                 self.zamowienia.append(Zamowienia(*element))
+            self.cur.execute('''SELECT NAZWA, ID_KLIENTA FROM KLIENT''')
+            data = self.cur.fetchall()
+            p = {}
+            j = 0
+            for i in data:
+                p[j] = (list(i))
+                j+=1
+            self.zamowienia[-1].klienci = p
+
+            self.cur.execute('''SELECT NAZWA, ID_PIZZA FROM PIZZA''')
+            data = self.cur.fetchall()
+            p = {}
+            j = 0
+            for i in data:
+                p[j] = (list(i))
+                j+=1
+            self.zamowienia[-1].pizze = p
 
         except lite.Error, e:
             print "Error %s:" % e.args[0]
@@ -78,7 +95,7 @@ class ZamowieniaWidokModel:
             self.cur.execute('''UPDATE ZAMOWIENIA SET DATA_ZAM = ? WHERE ID_ZAM = ?''',
                                (zamowienie.dataZam, zamowienie.idZam))
             self.cur.execute('''UPDATE ZAMOWIENIA SET DATA_DOSTARCZENIA = ? WHERE ID_ZAM = ?''',
-                               (zamowienie.dataDost, zamowienie.idZam))
+                               ('\''+zamowienie.dataDost+'\n', zamowienie.idZam))
             self.cur.execute('''UPDATE ZAMOWIENIA SET ID_PIZZA = ? WHERE ID_ZAM = ?''',
                                (zamowienie.idPizza, zamowienie.idZam))
             self.cur.execute('''UPDATE ZAMOWIENIA SET ID_KLIENTA = ? WHERE ID_ZAM = ?''',

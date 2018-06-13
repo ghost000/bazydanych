@@ -24,6 +24,9 @@ class PizzaWidokModel:
             data = self.cur.fetchall()
             for element in data:
                 self.pizze.append(Pizza(*element))
+                self.cur.execute('''select NAZWA from SKLADNIKI where ID_SKLADNIKA in ( select ID_SKLADNIKA from ZAWARTOSC where  ID_PIZZA = ?)''', (self.pizze[-1].idPizza,))
+                for i in self.cur.fetchall():
+                    self.pizze[-1].skladniki += str(i[0]) + " , "
 
         except lite.Error, e:
             print "Error %s:" % e.args[0]
